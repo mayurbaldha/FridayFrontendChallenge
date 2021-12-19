@@ -49,7 +49,6 @@ function App() {
   }, []);
   return (
     <div className="App">
-
       {carMakesOptionsList.length > 0 && <SelectMenu options={carMakesOptionsList} setSelectedValue={getCarModelResponse} />}
       {carMakesOptionsList.length === 0 && <button onClick={() => getCarMakesResponse()}>Get Car Makes</button>}
 
