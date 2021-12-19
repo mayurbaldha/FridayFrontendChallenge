@@ -58,10 +58,10 @@ function App() {
 
       {
         vehiclesInfo && vehiclesInfo.length > 0 &&
-        <VehicleInfo vehicles={vehiclesInfo}/>
+        <VehicleInfo vehicles={vehiclesInfo} />
       }
       {vehiclesInfo && vehiclesInfo.length === 0 && <p>No Vehicles Found <button onClick={() => getVehiclesResponse(selectedCarModel)}>Get Vehicles</button></p>}
-     
+
     </div>
   );
 }

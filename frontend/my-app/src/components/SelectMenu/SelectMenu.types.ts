@@ -1,4 +1,4 @@
 export interface SelectMenuProps {
- options:string[],
- setSelectedValue: (value:string) => void,
+    options: string[],
+    setSelectedValue: (value: string) => void,
 }
