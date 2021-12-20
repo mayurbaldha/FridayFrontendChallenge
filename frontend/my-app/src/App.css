@@ -19,7 +19,7 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
 .container {
-  margin: 80px auto;
+  margin: 10px auto;
   width: 400px;
   text-align: center;
 }

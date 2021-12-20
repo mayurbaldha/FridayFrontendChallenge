@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './App.css';
 import { handleApiCall } from './App.utils';
 import { SelectMenu } from './components/SelectMenu/SelectMenu';
-import { VehicleInfo } from './components/SelectMenu/VehicleInfo/VehicleInfo';
+import { VehicleInfo } from './components/VehicleInfo/VehicleInfo';
 import { useGetAllCarMakesMutation, useGetAllCarModelsMutation, useGetAllVehiclesMutation } from './services/apiSlice';
 
 function App() {
@@ -50,10 +50,10 @@ function App() {
   return (
     <div className="App">
       {carMakesOptionsList.length > 0 && <SelectMenu options={carMakesOptionsList} setSelectedValue={getCarModelResponse} />}
-      {carMakesOptionsList.length === 0 && <button onClick={() => getCarMakesResponse()}>Get Car Makes</button>}
+      {carMakesOptionsList.length === 0 && <button onClick={() => getCarMakesResponse()}>Retry to Get Car Makes</button>}
 
       {carModelOptionsList.length > 0 && <SelectMenu options={carModelOptionsList} setSelectedValue={getVehiclesResponse} />}
-      {selectedCarMake !== '' && carModelOptionsList.length === 0 && <button onClick={() => getCarModelResponse(selectedCarMake)}>Get Car Models</button>}
+      {selectedCarMake !== '' && carModelOptionsList.length === 0 && <button onClick={() => getCarModelResponse(selectedCarMake)}>Retry to Get Car Models</button>}
 
       {
         vehiclesInfo && vehiclesInfo.length > 0 &&

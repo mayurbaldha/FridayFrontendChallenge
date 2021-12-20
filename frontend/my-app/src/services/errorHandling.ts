@@ -10,7 +10,6 @@ export async function callApiWithErrorHandling({
   const response = await apiCall(params)
     .unwrap()
     .then((data: CommonResponse) => {
-      console.log(data);
       return { isSuccess: true, data, };
     })
     .catch((error: ApiError | any) => {
