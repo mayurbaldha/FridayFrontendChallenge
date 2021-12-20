@@ -24,43 +24,48 @@ function App() {
   const getCarModelResponse = async (make: string) => {
     //  console.log(make);
     setSelectedCarMake(make);
+    setVehiclesInfo([]);
     const response = await handleApiCall(getCarModel, { make });
     const carModels = response.data;
-    if (carModels) {
+    // if (carModels) {
       setCarModelOptionsList(carModels);
-    } else {
-      setCarModelOptionsList([]);
-    }
+    // } else {
+    //   setCarModelOptionsList([]);
+    // }
   }
   const getCarMakesResponse = async () => {
     const response = await handleApiCall(getCarMakes, {});
     const carMakes = response.data;
-    if (carMakes) {
+    // if (carMakes) {
       setCarMakesOptionsList(carMakes);
-    } else {
-      setCarMakesOptionsList([]);
-    }
+    // } else {
+    //   setCarMakesOptionsList([]);
+    // }
   }
   useEffect(() => {
     getCarMakesResponse();
+    // setSelectedCarMake('');
+    // setSelectedCarModel('');
+    // setVehiclesInfo([]);
     return () => {
       setCarMakesOptionsList([]);
+      // setCarModelOptionsList([]);
     }
   }, []);
   return (
     <div className="App">
-      {carMakesOptionsList.length > 0 && <SelectMenu options={carMakesOptionsList} setSelectedValue={getCarModelResponse} />}
-      {carMakesOptionsList.length === 0 && <button onClick={() => getCarMakesResponse()}>Retry to Get Car Makes</button>}
+      {carMakesOptionsList && carMakesOptionsList.length > 0 && <><SelectMenu labelTitle="Select Vehicle Make" options={carMakesOptionsList} setSelectedValue={getCarModelResponse} /></>}
+      {carMakesOptionsList== null ? <button onClick={() => getCarMakesResponse()}>Retry to Get Car Makes</button>:null}
 
-      {carModelOptionsList.length > 0 && <SelectMenu options={carModelOptionsList} setSelectedValue={getVehiclesResponse} />}
-      {selectedCarMake !== '' && carModelOptionsList.length === 0 && <button onClick={() => getCarModelResponse(selectedCarMake)}>Retry to Get Car Models</button>}
-
+      {carModelOptionsList?.length > 0 && <><SelectMenu labelTitle="Select Vehicle Model" options={carModelOptionsList} setSelectedValue={getVehiclesResponse} /></>}
+      {selectedCarMake !== '' && carModelOptionsList==null ? <button onClick={() => getCarModelResponse(selectedCarMake)}>Retry to Get Car Models</button>:null}
+      {carModelOptionsList?.length === 0 && carMakesOptionsList!=null? <p>No Vehicle Model Found </p>:null}
       {
         vehiclesInfo && vehiclesInfo.length > 0 &&
         <VehicleInfo vehicles={vehiclesInfo} />
       }
-      {vehiclesInfo && vehiclesInfo.length === 0 && <p>No Vehicles Found <button onClick={() => getVehiclesResponse(selectedCarModel)}>Get Vehicles</button></p>}
-
+      {selectedCarMake !== '' && selectedCarModel!=='' && vehiclesInfo==null  && <button onClick={() => getVehiclesResponse(selectedCarModel)}>Get Vehicles</button>}
+      {vehiclesInfo?.length === 0 && carModelOptionsList!=null && carModelOptionsList.length>0? <p>No Vehicles Found </p>:null}
     </div>
   );
 }
