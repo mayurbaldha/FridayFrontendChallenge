@@ -7,25 +7,24 @@ export async function callApiWithErrorHandling({
   params,
 }: ApiCallWithErrorHandling) {
 
-      const response = await apiCall(params)
-        .unwrap()
-        .then((data: CommonResponse) => {
-          console.log(data);
-          return { isSuccess: true, data, };
-        })
-        .catch((error: ApiError | any) => {
-          // eslint-disable-next-line @typescript-eslint/no-use-before-define
-          handleServerError({
-            apiCall,
-            params,
-            errorCode: error.originalStatus,
-            error,
-          });
+  const response = await apiCall(params)
+    .unwrap()
+    .then((data: CommonResponse) => {
+      return { isSuccess: true, data, };
+    })
+    .catch((error: ApiError | any) => {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
+      handleServerError({
+        apiCall,
+        params,
+        errorCode: error.originalStatus,
+        error,
+      });
 
-          return { isSuccess: false, data: null, errorMessage: null };
-        });
-      return response;
-   
+      return { isSuccess: false, data: null, errorMessage: null };
+    });
+  return response;
+
 
 }
 

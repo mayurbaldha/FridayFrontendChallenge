@@ -3,14 +3,14 @@ import { SelectMenuProps } from './SelectMenu.types';
 
 
 
-export function SelectMenu({options,setSelectedValue}:SelectMenuProps) {
+export function SelectMenu({ options, setSelectedValue }: SelectMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [optionsList, setOptionsList] = React.useState(options);
   useEffect(() => {
 
 
     return () => {
-     setOptionsList(options);
+      setOptionsList(options);
     }
   }, [options]);
 
@@ -30,16 +30,20 @@ export function SelectMenu({options,setSelectedValue}:SelectMenuProps) {
           )})}
           </div>
         </div> */}
-      <select onChange={(e) => {
-        setSelectedValue(e.target.value);
-      }}>
-        {optionsList.map((option, index) => {
-        return(
-          <option key={index} value={option}>{option}</option>
-        )
-      })}
-        </select>
-     
+      <section className="container">
+        <div className="dropdown">
+
+          <select className="dropdown-select" onChange={(e) => {
+            setSelectedValue(e.target.value);
+          }}>
+            {optionsList.map((option, index) => {
+              return (
+                <option key={index} value={option}>{option}</option>
+              )
+            })}
+          </select>
+        </div>
+      </section>
     </div>
   );
 }
