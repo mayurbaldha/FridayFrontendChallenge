@@ -3,7 +3,7 @@ import { SelectMenuProps } from './SelectMenu.types';
 
 
 
-export function SelectMenu({ options, setSelectedValue }: SelectMenuProps) {
+export function SelectMenu({ options, setSelectedValue,labelTitle }: SelectMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [optionsList, setOptionsList] = React.useState(options);
   useEffect(() => {
@@ -31,8 +31,9 @@ export function SelectMenu({ options, setSelectedValue }: SelectMenuProps) {
           </div>
         </div> */}
       <section className="container">
+      <label>{labelTitle}</label>
         <div className="dropdown">
-
+       
           <select className="dropdown-select" onChange={(e) => {
             setSelectedValue(e.target.value);
           }}>
